@@ -1,6 +1,16 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var openBrowserWebpackPlugin = require('open-browser-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+
+
+var definePlugin = new webpack.DefinePlugin({
+    __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
+    __PRERELEASE__: JSON.stringify(JSON.parse(process.env.BUILD_PRERELEASE || 'false'))
+});
+
 
 function rewriteUrl(replacePath) {
     return function (req, opt) {
@@ -20,7 +30,7 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js',
+        filename: 'bundle.js'
     },
     devServer: {
         publicPath: "/static/",
@@ -39,6 +49,7 @@ module.exports = {
     },
     resolve: {
         extensions: ["", ".js", ".jsx", ".css", ".json"],
+        alias: { }
     },
     devtool: 'cheap-module-source-map',
     module: {
@@ -50,11 +61,11 @@ module.exports = {
             },
             {
                 test: /\.css/,
-                loader: 'style!css'
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
             },
             {
                 test: /\.less/,
-                loader: 'style!css!less'
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
             },
             {
                 test: /\.(woff|woff2|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -65,10 +76,15 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
+        new openBrowserWebpackPlugin({ url: 'http://localhost:8080' }),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+        new ExtractTextPlugin("bundle.css")
+
+        /*,
         // 使用这个plugin，这是最简单的一个配置，更多资料可到github查看
         new HtmlWebpackPlugin({
             title: 'zhufeng-react',
-            template: path.resolve(__dirname, 'src/index.html'),
-        })
+            template: path.resolve(__dirname, 'src/index.html')
+        })*/
     ]
 };
