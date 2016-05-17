@@ -9,7 +9,7 @@ class Button extends Component {
 
         return (
             <button className="my-button" onClick={this.handleClick.bind(this)}>
-                快戳我 test react-hot-replace
+                快戳我 test react-hot-replace 112
             </button>
         );
     }
