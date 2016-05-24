@@ -23,6 +23,8 @@ export HandleEvent from './06-events/HandleEvent';
 // 7
 export UseChildrenComponent from './07-multiple-components/UseChildrenComponent';
 
+// 8
+export FormApp from './08-form/FormApp';
 /*
 
 // 2
@@ -43,8 +45,7 @@ export DestroyComponent from './04-lifecycle/DestroyComponent';
 
 
 
-// 8
-export FormApp from './08-form/FormApp';
+
 
 // 9
 export MixinDemo from './09-mixin/MixinDemo';

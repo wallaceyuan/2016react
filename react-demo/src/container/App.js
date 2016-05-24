@@ -13,7 +13,8 @@ import {
     HandleDOMComponent,
     Refs,
     HandleEvent,
-    UseChildrenComponent
+    UseChildrenComponent,
+    FormApp
 } from '../components';
 
 let data = {
@@ -37,6 +38,7 @@ class App extends Component{
                 <Refs />
                 <HandleEvent />
                 <UseChildrenComponent />
+                <FormApp />
             </div>
         )
     }
