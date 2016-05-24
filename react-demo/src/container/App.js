@@ -14,7 +14,8 @@ import {
     Refs,
     HandleEvent,
     UseChildrenComponent,
-    FormApp
+    FormApp,
+    MixinDemo
 } from '../components';
 
 let data = {
@@ -39,6 +40,7 @@ class App extends Component{
                 <HandleEvent />
                 <UseChildrenComponent />
                 <FormApp />
+                <MixinDemo />
             </div>
         )
     }
